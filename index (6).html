@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahi Numaish — Grand Exhibition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Marcellus&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon-deep:#3d0910;
+    --maroon:#5c0e17;
+    --maroon-light:#7a1620;
+    --gold:#d4af37;
+    --gold-bright:#f2cd5c;
+    --gold-soft:#e8cd8a;
+    --cream:#f7ecd4;
+    --ink:#241008;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--maroon-deep);
+    color:var(--cream);
+    font-family:'Poppins',sans-serif;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.logo-word{font-family:'Marcellus',serif;}
+  .accent-serif{font-family:'Cormorant Garamond',serif;}
+
+  /* decorative gold texture background */
+  .goldveil{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(212,175,55,0.18), transparent 40%),
+      radial-gradient(circle at 85% 75%, rgba(212,175,55,0.14), transparent 45%),
+      linear-gradient(160deg, var(--maroon-deep) 0%, var(--maroon) 55%, var(--maroon-deep) 100%);
+  }
+  .goldveil::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(212,175,55,0.05) 0 2px, transparent 2px 40px);
+  }
+
+  /* header */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 5%;
+    background:rgba(61,9,16,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(212,175,55,0.35);
+  }
+  .logo{display:flex; align-items:center; gap:12px;}
+  .logo-mark{
+    width:46px;height:46px;border-radius:50%;
+    border:2px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle, rgba(212,175,55,0.25), transparent 70%);
+    font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--gold-bright); font-size:22px;
+  }
+  .logo-word{font-size:22px; letter-spacing:1px; color:var(--gold-soft);}
+  .logo-word span{color:var(--gold-bright);}
+  .tagline-mini{font-size:10px; letter-spacing:3px; color:rgba(232,205,138,0.7); text-transform:uppercase; margin-top:2px;}
+  nav a{
+    color:var(--cream); text-decoration:none; margin-left:26px; font-size:14px; letter-spacing:0.5px;
+    transition:color .25s;
+  }
+  nav a:hover{color:var(--gold-bright);}
+  .nav-links{display:flex; align-items:center;}
+  @media (max-width:800px){ .nav-links{display:none;} }
+
+  /* hero */
+  .hero{
+    min-height:92vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:60px 6% 40px; position:relative;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:620px; height:620px; max-width:90vw; max-height:90vw;
+    border:1px solid rgba(212,175,55,0.25); border-radius:50%;
+  }
+  .hero-eyebrow{
+    color:var(--gold-bright); letter-spacing:5px; font-size:13px; text-transform:uppercase; margin-bottom:22px;
+    display:flex; align-items:center; gap:14px;
+  }
+  .hero-eyebrow::before,.hero-eyebrow::after{content:"";width:34px;height:1px;background:var(--gold);}
+  .hero h1{
+    font-size:clamp(38px,7vw,78px); line-height:1.05; color:var(--cream);
+    text-shadow:0 0 40px rgba(212,175,55,0.25);
+  }
+  .hero h1 em{font-style:normal; color:var(--gold-bright);}
+  .hero p.sub{
+    max-width:560px; margin:24px auto 0; font-family:'Cormorant Garamond',serif; font-size:22px;
+    color:var(--gold-soft); font-style:italic; line-height:1.5;
+  }
+  .hero-meta{
+    display:flex; gap:34px; margin-top:36px; flex-wrap:wrap; justify-content:center;
+    font-size:13px; letter-spacing:1px; color:rgba(247,236,212,0.8);
+  }
+  .hero-meta b{color:var(--gold-bright); display:block; font-size:15px; margin-bottom:2px; font-family:'Marcellus',serif;}
+  .cta-row{display:flex; gap:18px; margin-top:42px; flex-wrap:wrap; justify-content:center;}
+  .btn{
+    padding:15px 34px; border-radius:2px; font-size:14px; letter-spacing:1.5px; text-transform:uppercase;
+    text-decoration:none; font-weight:600; transition:transform .25s, box-shadow .25s; display:inline-block;
+    border:1px solid transparent;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg,var(--gold-bright),var(--gold));
+    color:var(--maroon-deep);
+    box-shadow:0 10px 30px -8px rgba(212,175,55,0.6);
+  }
+  .btn-gold:hover{transform:translateY(-3px); box-shadow:0 14px 34px -6px rgba(212,175,55,0.75);}
+  .btn-outline{
+    border-color:var(--gold-soft); color:var(--gold-soft); background:transparent;
+  }
+  .btn-outline:hover{background:rgba(212,175,55,0.12); transform:translateY(-3px);}
+
+  /* section shell */
+  .section{padding:90px 6%; position:relative;}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 54px;}
+  .eyebrow{color:var(--gold); letter-spacing:4px; font-size:12px; text-transform:uppercase; margin-bottom:14px;}
+  .section-head h2{font-size:clamp(30px,4vw,46px); color:var(--cream);}
+  .section-head p{font-family:'Cormorant Garamond',serif; font-size:19px; color:var(--gold-soft); margin-top:14px; font-style:italic;}
+
+  /* categories - horizontal scroll */
+  .cat-scroll{
+    display:flex; gap:26px; overflow-x:auto; padding:10px 6px 30px;
+    scroll-snap-type:x mandatory;
+  }
+  .cat-scroll::-webkit-scrollbar{height:8px;}
+  .cat-scroll::-webkit-scrollbar-thumb{background:var(--gold); border-radius:10px;}
+  .cat-scroll::-webkit-scrollbar-track{background:rgba(212,175,55,0.1);}
+  .cat-card{
+    scroll-snap-align:start;
+    flex:0 0 280px;
+    background:linear-gradient(180deg, rgba(122,22,32,0.55), rgba(61,9,16,0.85));
+    border:1px solid rgba(212,175,55,0.35);
+    border-radius:6px;
+    overflow:hidden;
+    transition:transform .3s, border-color .3s;
+  }
+  .cat-card:hover{transform:translateY(-8px); border-color:var(--gold-bright);}
+  .cat-img{
+    width:100%; height:190px; object-fit:cover;
+    filter:saturate(1.05) contrast(1.02);
+    border-bottom:1px solid rgba(212,175,55,0.35);
+  }
+  .cat-body{padding:20px 20px 24px;}
+  .cat-num{font-size:11px; letter-spacing:2px; color:var(--gold); margin-bottom:8px;}
+  .cat-card h3{font-size:22px; color:var(--cream); margin-bottom:8px;}
+  .cat-card p{font-size:13.5px; color:rgba(247,236,212,0.75); line-height:1.6; margin-bottom:16px;}
+  .cat-cta{
+    font-size:12.5px; letter-spacing:1px; color:var(--gold-bright); text-decoration:none;
+    display:inline-flex; align-items:center; gap:6px; border-bottom:1px solid var(--gold-bright); padding-bottom:2px;
+  }
+  .cat-cta:hover{color:#fff; border-color:#fff;}
+
+  /* about strip */
+  .strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:rgba(212,175,55,0.35);
+    border-top:1px solid rgba(212,175,55,0.35); border-bottom:1px solid rgba(212,175,55,0.35);
+  }
+  .strip-item{
+    background:var(--maroon-deep); padding:34px 20px; text-align:center;
+  }
+  .strip-item b{display:block; font-family:'Marcellus',serif; font-size:30px; color:var(--gold-bright); margin-bottom:6px;}
+  .strip-item span{font-size:12px; letter-spacing:1px; color:rgba(247,236,212,0.75);}
+  @media (max-width:700px){ .strip{grid-template-columns:repeat(2,1fr);} }
+
+  /* form section */
+  .form-wrap{
+    max-width:620px; margin:0 auto;
+    background:linear-gradient(180deg, rgba(122,22,32,0.5), rgba(61,9,16,0.9));
+    border:1px solid rgba(212,175,55,0.4);
+    border-radius:8px;
+    padding:44px 36px;
+    text-align:center;
+  }
+  .form-wrap p{color:rgba(247,236,212,0.8); font-size:14.5px; margin-bottom:26px; line-height:1.7;}
+  .form-note{
+    margin-top:22px; font-size:12px; color:rgba(232,205,138,0.6);
+  }
+
+  /* footer */
+  footer{
+    padding:50px 6% 30px; text-align:center; border-top:1px solid rgba(212,175,55,0.3);
+  }
+  footer .logo{justify-content:center; margin-bottom:14px;}
+  footer p{font-size:13px; color:rgba(247,236,212,0.6); margin-top:10px;}
+  .foot-links{margin-top:18px; display:flex; gap:24px; justify-content:center; flex-wrap:wrap;}
+  .foot-links a{color:var(--gold-soft); font-size:13px; text-decoration:none;}
+  .foot-links a:hover{color:var(--gold-bright);}
+
+  /* whatsapp floating button */
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:60;
+    width:60px; height:60px; border-radius:50%;
+    background:#25D366;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+    text-decoration:none;
+    border:2px solid rgba(255,255,255,0.25);
+    animation:pulse 2.4s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 0 rgba(37,211,102,0.5);}
+    70%{box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 16px rgba(37,211,102,0);}
+    100%{box-shadow:0 8px 24px rgba(0,0,0,0.4),0 0 0 0 rgba(37,211,102,0);}
+  }
+
+  ::selection{background:var(--gold); color:var(--maroon-deep);}
+</style>
+</head>
+<body>
+
+<div class="goldveil"></div>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">ﷲ</div>
+    <div>
+      <div class="logo-word">SHAHI <span>NUMAISH</span></div>
+      <div class="tagline-mini">The Grand Exhibition</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#categories">Categories</a>
+    <a href="#about">Details</a>
+    <a href="#register">Register</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Ek Chaht Tale, Har Rang</div>
+  <h1>Shahi <em>Numaish</em><br>Grand Exhibition</h1>
+  <p class="sub">Kapdon se ley kar zewaraat tak — ek hi jagah, shahana andaaz mein. Aayein aur khud dekhein.</p>
+  <div class="hero-meta">
+    <div><b>6</b>Categories</div>
+    <div><b>3 Din</b>Non-Stop Numaish</div>
+    <div><b>Free</b>Entry Pass</div>
+  </div>
+  <div class="cta-row">
+    <a href="#register" class="btn btn-gold">Free Pass Book Karein</a>
+    <a href="https://wa.me/923000000000?text=Assalam-o-Alaikum%2C%20mujhe%20Shahi%20Numaish%20exhibition%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank" class="btn btn-outline">WhatsApp Par Puchein</a>
+  </div>
+</section>
+
+<section class="section" id="categories">
+  <div class="section-head">
+    <div class="eyebrow">Hamari Categories</div>
+    <h2>Har Zaroorat Ka Ek Hi Address</h2>
+    <p>Scroll karein aur apni pasand ki category dekhein</p>
+  </div>
+
+  <div class="cat-scroll">
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&q=80" alt="Cloth Collection">
+      <div class="cat-body">
+        <div class="cat-num">01 — Cloth</div>
+        <h3>Kapron Ka Collection</h3>
+        <p>Lawn, silk, chiffon aur cotton — har mausam, har mauqe ke liye tareen designs.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Cloth%20category%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500&q=80" alt="Jewellery">
+      <div class="cat-body">
+        <div class="cat-num">02 — Jewellery</div>
+        <h3>Zewaraat</h3>
+        <p>Kundan, meenakari aur artificial jewellery ka shahana intekhaab.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Jewellery%20category%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=500&q=80" alt="Decoration Pieces">
+      <div class="cat-body">
+        <div class="cat-num">03 — Decor</div>
+        <h3>Decoration Pieces</h3>
+        <p>Ghar aur function ki sajawat ke liye khoobsurat aur unique showpieces.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Decoration%20Pieces%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1522771930-78848d9293e8?w=500&q=80" alt="Bed Sheets">
+      <div class="cat-body">
+        <div class="cat-num">04 — Bedding</div>
+        <h3>Bed Sheets</h3>
+        <p>Comfy aur stylish bed sheets, king se single size tak, har design mein.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Bed%20Sheets%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500&q=80" alt="Children Dresses">
+      <div class="cat-body">
+        <div class="cat-num">05 — Kids</div>
+        <h3>Children Dresses</h3>
+        <p>Chotay bachon ke liye pyare aur mazedaar outfits, har size available.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Children%20Dresses%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+    <div class="cat-card">
+      <img class="cat-img" src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=500&q=80" alt="Ladies Dresses">
+      <div class="cat-body">
+        <div class="cat-num">06 — Ladies</div>
+        <h3>Ladies Dresses</h3>
+        <p>Formal se casual tak, khawateen ke liye tareen fashion ka intekhaab.</p>
+        <a class="cat-cta" href="https://wa.me/923000000000?text=Mujhe%20Ladies%20Dresses%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank">WhatsApp Par Puchein →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="strip" id="about">
+  <div class="strip-item"><b>50+</b><span>Stalls</span></div>
+  <div class="strip-item"><b>6</b><span>Categories</span></div>
+  <div class="strip-item"><b>3 Din</b><span>Timings 12PM–10PM</span></div>
+  <div class="strip-item"><b>Free</b><span>Parking &amp; Entry</span></div>
+</div>
+
+<section class="section" id="register">
+  <div class="section-head">
+    <div class="eyebrow">Apni Jagah Confirm Karein</div>
+    <h2>Free Entry Pass Register Karein</h2>
+    <p>Form fill karein aur apna pass seedha WhatsApp par payein</p>
+  </div>
+
+  <div class="form-wrap">
+    <p>Neeche diye button par click kar ke hamara registration form khulay ga (Google Form). Form fill karte hi hamari team aap se rabta kare gi.</p>
+    <a class="btn btn-gold" href="https://forms.google.com/YOUR-FORM-LINK-YAHAN-DALEIN" target="_blank">Registration Form Kholein</a>
+    <div class="form-note">Note: is button ka link apne asal Google Form URL se replace kar dein.</div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">
+    <div class="logo-mark">ﷲ</div>
+    <div>
+      <div class="logo-word">SHAHI <span>NUMAISH</span></div>
+      <div class="tagline-mini">The Grand Exhibition</div>
+    </div>
+  </div>
+  <div class="foot-links">
+    <a href="#categories">Categories</a>
+    <a href="#register">Register</a>
+    <a href="https://wa.me/923000000000" target="_blank">WhatsApp</a>
+  </div>
+  <p>&copy; 2026 Shahi Numaish. Tamam huqooq mahfooz hain.</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/923000000000?text=Assalam-o-Alaikum%2C%20mujhe%20Shahi%20Numaish%20exhibition%20ke%20baray%20mein%20maloomat%20chahiye" target="_blank" aria-label="WhatsApp par rabta karein">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.52 3.6 1.42 5.1L2 22l5.16-1.5a9.9 9.9 0 0 0 4.88 1.28h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.8 14.05c-.25.7-1.24 1.29-2.02 1.45-.55.11-1.26.2-3.66-.78-3.07-1.27-5.05-4.38-5.2-4.58-.15-.2-1.24-1.65-1.24-3.15s.78-2.23 1.06-2.53c.27-.3.6-.38.8-.38h.58c.19 0 .43-.03.68.52.26.57.87 1.99.95 2.13.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.17-.3.38-.45.5-.15.15-.31.3-.13.6.18.3.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.48 1.53.3.15.48.13.66-.08.18-.2.76-.88.96-1.19.2-.3.4-.25.66-.15.27.1 1.7.8 1.99.95.3.15.5.22.57.35.08.13.08.75-.17 1.45z"/></svg>
+</a>
+
+</body>
+</html>
